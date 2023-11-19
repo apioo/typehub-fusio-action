@@ -1,5 +1,8 @@
 name: "TypeHub Fusio Push"
 description: "This action pushes a Fusio API specification to the typehub.cloud platform"
+branding:
+  icon: send
+  color: green
 inputs:
   document:
     description: "The TypeHub target document"
