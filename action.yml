@@ -1,0 +1,41 @@
+name: "TypeHub Fusio Push"
+description: "This action pushes a Fusio API specification to the typehub.cloud platform"
+inputs:
+  document:
+    description: "The TypeHub target document"
+    required: true
+  client-id:
+    description: "The TypeHub client id"
+    required: true
+  client-secret:
+    description: "The TypeHub client secret"
+    required: true
+  filter:
+    description: "Optional a filter"
+    default: "app"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+        coverage: none
+    - name: Setup MySQL
+      run: |
+        sudo /etc/init.d/mysql start
+        mysql -e "CREATE DATABASE fusio;" -uroot -proot
+        mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test1234';" -uroot -proot
+    - name: Composer install
+      run: composer install --no-interaction --no-ansi --no-progress
+    - name: Setup Fusio
+      environment:
+        APP_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+      run: |
+        php bin/fusio migrate --no-interaction
+        php bin/fusio adduser --role=1 --username=test --email=test@test.com --password=test1234!
+        php bin/fusio login --username=test --password=test1234!
+        php bin/fusio deploy
+        php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client-id }}" --client_secret="${{ inputs.client-secret }}" --filter="${{ inputs.filter }}"
