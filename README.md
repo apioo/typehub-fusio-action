@@ -1,7 +1,8 @@
 # TypeHub-Fusio-Action
 
 You can use this GitHub action at your Fusio project to automatically push your
-API specification to TypeHub. The following example shows you can use the action:
+API specification to [TypeHub](https://typehub.cloud/). The following example shows
+you can use the action:
 
 ```yaml
 name: TypeHub
