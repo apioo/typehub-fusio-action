@@ -32,10 +32,12 @@ runs:
         sudo /etc/init.d/mysql start
         mysql -e "CREATE DATABASE fusio;" -uroot -proot
         mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test1234';" -uroot -proot
+      shell: bash
     - name: Composer install
       run: composer install --no-interaction --no-ansi --no-progress
+      shell: bash
     - name: Setup Fusio
-      environment:
+      env:
         APP_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
       run: |
         php bin/fusio migrate --no-interaction
@@ -43,3 +45,4 @@ runs:
         php bin/fusio login --username=test --password=test1234!
         php bin/fusio deploy
         php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client-id }}" --client_secret="${{ inputs.client-secret }}" --filter="${{ inputs.filter }}"
+      shell: bash
