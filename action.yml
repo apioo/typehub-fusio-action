@@ -8,10 +8,10 @@ inputs:
   document:
     description: "The TypeHub target document"
     required: true
-  client_id:
+  client-id:
     description: 'The typehub.cloud client id, this is either your username or an app key'
     required: true
-  client_secret:
+  client-secret:
     description: 'The typehub.cloud client secret, this is either your password or an app secret'
     required: true
   filter:
@@ -42,4 +42,4 @@ runs:
         php bin/fusio adduser --role=1 --username=test --email=test@test.com --password=test1234!
         php bin/fusio login --username=test --password=test1234!
         php bin/fusio deploy
-        php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client_id }}" --client_secret="${{ inputs.client_secret }}" --filter="${{ inputs.filter }}"
+        php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client-id }}" --client_secret="${{ inputs.client-secret }}" --filter="${{ inputs.filter }}"

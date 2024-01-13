@@ -9,11 +9,11 @@ instance to the [TypeHub](https://typehub.cloud/) platform.
 
 The target TypeHub document name.
 
-## `client_id`
+## `client-id`
 
 **Required** The TypeHub client id, this is either your username or an app key.
 
-## `client_secret`
+## `client-secret`
 
 **Required** The TypeHub client secret, this is either your password or an app secret.
 
@@ -36,7 +36,7 @@ jobs:
         uses: apioo/typehub-fusio-action@v0.1.1
         with:
           document: sdk
-          client_id: ${{ secrets.TYPEHUB_CLIENT_ID }}
-          client_secret: ${{ secrets.TYPEHUB_CLIENT_SECRET }}
+          client-id: ${{ secrets.TYPEHUB_CLIENT_ID }}
+          client-secret: ${{ secrets.TYPEHUB_CLIENT_SECRET }}
           filter: app
 ```
