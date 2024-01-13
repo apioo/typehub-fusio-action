@@ -39,6 +39,7 @@ runs:
     - name: Setup Fusio
       env:
         APP_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+        FUSIO_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
       run: |
         php bin/fusio migrate --no-interaction
         php bin/fusio adduser --role=1 --username=test --email=test@test.com --password=test1234!
