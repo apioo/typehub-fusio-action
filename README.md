@@ -33,10 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Push
-        uses: apioo/typehub-fusio-action@v0.1.0
+        uses: apioo/typehub-fusio-action@v0.1.1
         with:
           document: sdk
-          client-id: ${{ secrets.TYPEHUB_CLIENT_ID }}
-          client-secret: ${{ secrets.TYPEHUB_CLIENT_SECRET }}
+          client_id: ${{ secrets.TYPEHUB_CLIENT_ID }}
+          client_secret: ${{ secrets.TYPEHUB_CLIENT_SECRET }}
           filter: app
 ```
