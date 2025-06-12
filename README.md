@@ -19,7 +19,11 @@ The target TypeHub document name.
 
 ## `filter`
 
-Optional an API filter
+Optional, whether to filter your API, default is app
+
+## `standalone`
+
+Optional, whether to ignore base url and security settings, default is false
 
 ## Example usage
 
@@ -33,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Push
-        uses: apioo/typehub-fusio-action@v0.1.5
+        uses: apioo/typehub-fusio-action@v0.1.6
         with:
           document: sdk
           client-id: ${{ secrets.TYPEHUB_CLIENT_ID }}

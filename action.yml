@@ -15,10 +15,10 @@ inputs:
     description: 'The typehub.cloud client secret, this is either your password or an app secret'
     required: true
   filter:
-    description: "Optional a filter"
+    description: "Optional, whether to filter your API, default is app"
     default: "app"
   standalone:
-    description: "Optional whether to ignore base url and security settings"
+    description: "Optional, whether to ignore base url and security settings, default is false"
     default: "false"
 runs:
   using: "composite"
