@@ -17,6 +17,9 @@ inputs:
   filter:
     description: "Optional a filter"
     default: "app"
+  standalone:
+    description: "Optional whether to ignore base url and security settings"
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -45,5 +48,20 @@ runs:
         php bin/fusio adduser --role=1 --username=test --email=test@test.com --password=test1234!
         php bin/fusio login --username=test --password=test1234!
         php bin/fusio deploy
+      shell: bash
+    - name: Push to TypeHub
+      if: inputs.standalone != 'true'
+      env:
+        APP_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+        FUSIO_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+      run: |
         php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client-id }}" --client_secret="${{ inputs.client-secret }}" --filter="${{ inputs.filter }}"
+      shell: bash
+    - name: Push to TypeHub standalone
+      if: inputs.standalone == 'true'
+      env:
+        APP_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+        FUSIO_CONNECTION: "pdo-mysql://root:test1234@localhost/fusio"
+      run: |
+        php bin/fusio api:push '${{ inputs.document }}' --client_id="${{ inputs.client-id }}" --client_secret="${{ inputs.client-secret }}" --filter="${{ inputs.filter }}" --standalone
       shell: bash
